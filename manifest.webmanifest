@@ -1,0 +1,13 @@
+{
+  "name": "Murdokus",
+  "short_name": "Murdokus",
+  "description": "Murder-mystery logic cases and sudoku, fully offline.",
+  "start_url": ".",
+  "scope": ".",
+  "display": "standalone",
+  "background_color": "#EFE6D0",
+  "theme_color": "#8E2A23",
+  "icons": [
+    { "src": "apple-touch-icon.png", "sizes": "180x180", "type": "image/png" }
+  ]
+}
