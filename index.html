@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="es">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
@@ -11,8 +11,6 @@
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" href="apple-touch-icon.png">
-</head>
-<body>
 <title>Murdokus</title>
 <style>
   :root{
@@ -58,6 +56,8 @@
     padding-bottom:calc(64px + env(safe-area-inset-bottom));
     min-height:100vh;
   }
+  body[data-lang="es"] .only-en{display:none;}
+  body[data-lang="en"] .only-es{display:none;}
   button{font:inherit; color:inherit; background:none; border:none; cursor:pointer; touch-action:manipulation;}
   .tw{font-family:"American Typewriter","Courier New",Courier,monospace;}
   .mono{font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace; font-variant-numeric:tabular-nums;}
@@ -66,9 +66,7 @@
     display:flex; align-items:baseline; justify-content:space-between;
     padding:14px 16px 8px; max-width:560px; margin:0 auto;
   }
-  header.app h1{
-    margin:0; font-size:22px; letter-spacing:.14em; font-weight:700;
-  }
+  header.app h1{margin:0; font-size:22px; letter-spacing:.14em; font-weight:700;}
   header.app h1 .dot{color:var(--accent);}
   header.app .sub{font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--muted);}
 
@@ -112,9 +110,7 @@
     font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--muted);
     margin:14px 2px 4px;
   }
-  .gridblock{
-    display:grid; gap:3px; user-select:none; -webkit-user-select:none;
-  }
+  .gridblock{display:grid; gap:3px; user-select:none; -webkit-user-select:none;}
   .gcell,.ghead,.grow{
     aspect-ratio:1; display:flex; align-items:center; justify-content:center;
     border-radius:6px; font-size:19px; min-width:0;
@@ -139,6 +135,27 @@
   .btn.primary{background:var(--accent); border-color:var(--accent); color:#F9F3E3;}
   .btn.quiet{color:var(--muted); font-weight:400; text-transform:none; letter-spacing:0; border:none; background:none; flex:0 0 auto;}
   .btn:active{transform:translateY(1px);}
+
+  /* riddles */
+  .rulebox{
+    margin:10px 0 4px; padding:7px 11px; border-left:3px solid var(--accent);
+    background:var(--accent-soft); font-size:14px; border-radius:0 6px 6px 0; font-weight:600;
+  }
+  .testi{
+    display:flex; align-items:center; gap:11px; padding:9px 12px; margin:7px 0;
+    border:1.5px solid var(--line2); border-radius:8px; background:var(--panel);
+    cursor:pointer; user-select:none; -webkit-user-select:none;
+  }
+  .testi .e{font-size:25px;}
+  .testi .col{display:flex; flex-direction:column; min-width:0;}
+  .testi .who{font-weight:700; font-size:12px; letter-spacing:.08em; text-transform:uppercase; color:var(--muted);}
+  .testi .q{font-style:italic; font-size:14.5px;}
+  .testi .res{margin-left:auto; font-weight:800; font-size:17px;}
+  .testi.truth{border-color:var(--good);}
+  .testi.truth .res{color:var(--good);}
+  .testi.lie{border-color:var(--bad);}
+  .testi.lie .res{color:var(--bad);}
+  .testi.guilty{background:var(--accent-soft); border-color:var(--accent);}
 
   /* sudoku */
   .sboard{
@@ -177,15 +194,16 @@
 
   /* desk */
   .cards{display:grid; grid-template-columns:1fr 1fr; gap:8px; margin:10px 0;}
-  .card{
-    background:var(--panel); border:1.5px solid var(--line2); border-radius:10px; padding:10px 12px;
-  }
+  .card{background:var(--panel); border:1.5px solid var(--line2); border-radius:10px; padding:10px 12px;}
   .card .k{font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:var(--muted);}
   .card .v{font-size:24px; font-weight:700; margin-top:2px;}
   .card .v small{font-size:13px; color:var(--muted); font-weight:400;}
   .desk h2{font-size:13px; letter-spacing:.18em; text-transform:uppercase; color:var(--brass); margin:20px 2px 6px;}
   .desk p{margin:6px 0; font-size:14.5px; max-width:62ch;}
   .desk p b{color:var(--accent);}
+  .desk ol.steps{font-size:14.5px; padding-left:22px; max-width:62ch; margin:6px 0;}
+  .desk ol.steps li{margin:7px 0;}
+  .desk ol.steps b{color:var(--accent);}
   table.st{width:100%; border-collapse:collapse; font-size:14px; margin:6px 0;}
   table.st td,table.st th{padding:5px 8px; border-bottom:1px solid var(--line); text-align:left;}
   table.st th{font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); font-weight:600;}
@@ -197,7 +215,7 @@
     padding-bottom:env(safe-area-inset-bottom);
   }
   nav.tabbar button{
-    flex:1; padding:10px 0 8px; font-size:11.5px; letter-spacing:.1em; text-transform:uppercase;
+    flex:1; padding:10px 0 8px; font-size:11px; letter-spacing:.08em; text-transform:uppercase;
     color:var(--muted); display:flex; flex-direction:column; align-items:center; gap:2px;
   }
   nav.tabbar button .ic{font-size:20px; line-height:1;}
@@ -223,6 +241,10 @@
     font-size:16px; text-align:left;
   }
   .suspects button .e{font-size:24px;}
+  .reveal{margin:10px 0; font-size:14px;}
+  .reveal div{display:flex; justify-content:space-between; gap:10px; padding:3px 0; border-bottom:1px solid var(--line);}
+  .reveal .ok{color:var(--good); font-weight:600;}
+  .reveal .no{color:var(--bad); font-weight:600;}
   .bigstamp{
     display:inline-block; border:3px solid var(--accent); color:var(--accent);
     padding:6px 16px; border-radius:6px; font-size:22px; letter-spacing:.16em;
@@ -234,24 +256,26 @@
     @keyframes stampin{from{transform:rotate(-4deg) scale(2.1); opacity:0;} to{transform:rotate(-4deg) scale(1); opacity:1;}}
   }
 </style>
+</head>
+<body data-lang="es">
 
 <header class="app">
   <h1 class="tw">MURDOKUS<span class="dot">.</span></h1>
-  <div class="sub tw">flight dossier</div>
+  <div class="sub tw" id="hdrsub">expediente de vuelo</div>
 </header>
 
 <main>
 <!-- ============ CASES ============ -->
 <section class="view on" id="v-case">
   <div class="seg" id="caseseg">
-    <button data-d="easy">Rookie</button>
+    <button data-d="easy">Novato</button>
     <button data-d="medium" class="on">Detective</button>
     <button data-d="hard">Inspector</button>
   </div>
 
   <div class="dossier">
     <div class="casetop">
-      <span class="stamp tw" id="casenum">CASE Nº 1</span>
+      <span class="stamp tw" id="casenum">CASO Nº 1</span>
       <span class="timer mono" id="casetimer">0:00</span>
     </div>
     <p class="victim" id="victimline"></p>
@@ -262,12 +286,36 @@
   <div id="gridarea"></div>
 
   <div class="actions">
-    <button class="btn" id="b-hint">Hint</button>
-    <button class="btn" id="b-check">Check</button>
-    <button class="btn primary" id="b-accuse">Accuse</button>
+    <button class="btn" id="b-hint">Pista</button>
+    <button class="btn" id="b-check">Comprobar</button>
+    <button class="btn primary" id="b-accuse">Acusar</button>
   </div>
   <div class="actions" style="margin-top:0">
-    <button class="btn quiet" id="b-skip">Skip this case →</button>
+    <button class="btn quiet" id="b-skip">Saltar caso →</button>
+  </div>
+</section>
+
+<!-- ============ RIDDLES ============ -->
+<section class="view" id="v-riddle">
+  <div class="seg" id="riddleseg">
+    <button data-d="easy">Fácil</button>
+    <button data-d="medium" class="on">Media</button>
+    <button data-d="hard">Difícil</button>
+  </div>
+
+  <div class="dossier">
+    <div class="casetop">
+      <span class="stamp tw" id="riddlenum">ACERTIJO Nº 1</span>
+      <span class="timer mono" id="riddletimer">0:00</span>
+    </div>
+    <p class="victim" id="r-intro"></p>
+    <div class="rulebox" id="r-rule"></div>
+  </div>
+
+  <div id="r-testimonies"></div>
+
+  <div class="actions" style="margin-top:8px">
+    <button class="btn quiet" id="r-skip">Saltar acertijo →</button>
   </div>
 </section>
 
@@ -278,9 +326,9 @@
     <button data-n="9" class="on">9 × 9</button>
   </div>
   <div class="seg" id="suddiff">
-    <button data-d="easy">Easy</button>
-    <button data-d="medium" class="on">Medium</button>
-    <button data-d="hard">Hard</button>
+    <button data-d="easy">Fácil</button>
+    <button data-d="medium" class="on">Media</button>
+    <button data-d="hard">Difícil</button>
   </div>
 
   <div class="dossier" style="padding:8px 14px">
@@ -293,41 +341,86 @@
   <div class="sboard" id="sboard"></div>
   <div class="pad" id="spad"></div>
   <div class="actions" style="margin-top:4px">
-    <button class="btn quiet" id="s-new">New puzzle</button>
-    <button class="btn quiet" id="s-check">Check</button>
-    <button class="btn quiet" id="s-sym">Symbols: off</button>
+    <button class="btn quiet" id="s-new">Nuevo puzle</button>
+    <button class="btn quiet" id="s-check">Comprobar</button>
+    <button class="btn quiet" id="s-sym">Símbolos: no</button>
   </div>
 </section>
 
 <!-- ============ DESK ============ -->
 <section class="view desk" id="v-desk">
-  <h2 class="tw">Record of service</h2>
+  <div class="seg" id="langseg">
+    <button data-l="es" class="on">Español</button>
+    <button data-l="en">English</button>
+  </div>
+
+  <div class="only-es">
+    <h2 class="tw">Instalar en el iPhone</h2>
+    <ol class="steps">
+      <li>En el iPhone, abre <b>Safari</b> y entra en <b>tramptral.github.io/murdokus</b>.</li>
+      <li>Toca el botón <b>Compartir</b>: el cuadrado con la flecha hacia arriba, en la barra de abajo.</li>
+      <li>Baja por el menú y toca <b>Añadir a pantalla de inicio</b>, y después <b>Añadir</b>.</li>
+      <li>Verás el icono <b>M.</b> en tu pantalla de inicio, como una app más. Ábrelo una vez mientras aún tengas internet.</li>
+      <li>Listo. A partir de ese momento funciona <b>sin conexión</b>, en modo avión, aunque cierres la app. El progreso se guarda solo.</li>
+    </ol>
+  </div>
+  <div class="only-en">
+    <h2 class="tw">Install on iPhone</h2>
+    <ol class="steps">
+      <li>On your iPhone, open <b>Safari</b> and go to <b>tramptral.github.io/murdokus</b>.</li>
+      <li>Tap the <b>Share</b> button: the square with the up arrow in the bottom bar.</li>
+      <li>Scroll down the menu, tap <b>Add to Home Screen</b>, then <b>Add</b>.</li>
+      <li>You'll see the <b>M.</b> icon on your home screen like any app. Open it once while still online.</li>
+      <li>Done. From then on it works <b>offline</b>, in airplane mode, even after closing the app. Progress saves automatically.</li>
+    </ol>
+  </div>
+
+  <h2 class="tw" id="h-record">Historial de servicio</h2>
   <div class="cards">
-    <div class="card"><div class="k">Cases closed</div><div class="v" id="st-cases">0</div></div>
-    <div class="card"><div class="k">Streak</div><div class="v" id="st-streak">0</div></div>
-    <div class="card"><div class="k">Sudokus solved</div><div class="v" id="st-suds">0</div></div>
-    <div class="card"><div class="k">Time on duty</div><div class="v" id="st-time">0<small>m</small></div></div>
+    <div class="card"><div class="k" id="k-cases">Casos cerrados</div><div class="v" id="st-cases">0</div></div>
+    <div class="card"><div class="k" id="k-riddles">Acertijos resueltos</div><div class="v" id="st-riddles">0</div></div>
+    <div class="card"><div class="k" id="k-streak">Racha</div><div class="v" id="st-streak">0</div></div>
+    <div class="card"><div class="k" id="k-beststreak">Mejor racha</div><div class="v" id="st-beststreak">0</div></div>
+    <div class="card"><div class="k" id="k-suds">Sudokus resueltos</div><div class="v" id="st-suds">0</div></div>
+    <div class="card"><div class="k" id="k-time">Tiempo de servicio</div><div class="v" id="st-time">0<small>m</small></div></div>
   </div>
   <table class="st" id="st-table"></table>
 
-  <h2 class="tw">How to play — Cases</h2>
-  <p>Someone has been murdered. The body's location is given; every clue is true. Your job: work out <b>who was where, holding what</b>.</p>
-  <p>Tap a grid cell to cycle: blank → <b>✗</b> (impossible) → <b>✓</b> (confirmed). Marking ✓ auto-crosses the rest of its row and column. Each suspect carried exactly one weapon and stood in exactly one room. Tap a clue to strike it out once used.</p>
-  <p>When you know who was in the murder room, hit <b>Accuse</b>. A wrong accusation breaks your streak — the case can still be finished.</p>
-  <p><b>Hint</b> fixes or reveals one cell. <b>Check</b> flags any marks that are wrong.</p>
+  <div class="only-es">
+    <h2 class="tw">Cómo jugar — Casos</h2>
+    <p>Alguien ha sido asesinado. Se conoce la sala del crimen y todas las pistas son verdaderas. Tu trabajo: deducir <b>quién estaba en cada sala y con qué arma</b>.</p>
+    <p>Toca una casilla para alternar: vacío → <b>✗</b> (imposible) → <b>✓</b> (confirmado). Al marcar ✓ se tachan automáticamente el resto de su fila y columna. Cada sospechoso llevaba exactamente un arma y estaba en exactamente una sala. Toca una pista para tacharla cuando ya la hayas usado.</p>
+    <p>Cuando sepas quién estaba en la sala del crimen, pulsa <b>Acusar</b>. Una acusación errónea rompe tu racha, pero puedes seguir con el caso.</p>
+    <p><b>Pista</b> corrige o revela una casilla. <b>Comprobar</b> señala las marcas erróneas.</p>
 
-  <h2 class="tw">How to play — Murdoku</h2>
-  <p>Classic sudoku: each row, column and box contains every symbol once. Tap a cell, then a number. <b>✎ Notes</b> toggles pencil marks. Duplicates show in red as you go; <b>Check</b> compares against the true solution. Symbols mode swaps digits for the evidence locker.</p>
+    <h2 class="tw">Cómo jugar — Acertijos</h2>
+    <p>Cada sospechoso hace una declaración. La regla del caso te dice cuántos mienten. Razona qué combinación es coherente y <b>toca al culpable</b> para acusarlo. Solo hay una respuesta posible.</p>
 
-  <h2 class="tw">Flight mode</h2>
-  <p>Everything runs on the device — no internet needed once the page is open. Before boarding: open this page, then <b>Share → Add to Home Screen</b>. Open it once more while still online, and keep it open (don't force-quit) when you switch to airplane mode. Progress saves automatically.</p>
+    <h2 class="tw">Cómo jugar — Murdoku</h2>
+    <p>Sudoku clásico: cada fila, columna y caja contiene cada símbolo una sola vez. Toca una casilla y luego un número. <b>✎ Notas</b> activa las anotaciones a lápiz. Los duplicados se marcan en rojo al instante; <b>Comprobar</b> compara con la solución real. El modo símbolos cambia los dígitos por el armario de pruebas.</p>
+  </div>
+
+  <div class="only-en">
+    <h2 class="tw">How to play — Cases</h2>
+    <p>Someone has been murdered. The body's location is given; every clue is true. Your job: work out <b>who was where, holding what</b>.</p>
+    <p>Tap a grid cell to cycle: blank → <b>✗</b> (impossible) → <b>✓</b> (confirmed). Marking ✓ auto-crosses the rest of its row and column. Each suspect carried exactly one weapon and stood in exactly one room. Tap a clue to strike it out once used.</p>
+    <p>When you know who was in the murder room, hit <b>Accuse</b>. A wrong accusation breaks your streak — the case can still be finished.</p>
+    <p><b>Hint</b> fixes or reveals one cell. <b>Check</b> flags any marks that are wrong.</p>
+
+    <h2 class="tw">How to play — Riddles</h2>
+    <p>Each suspect makes a statement. The case rule tells you how many are lying. Work out which combination is consistent and <b>tap the culprit</b> to accuse them. Only one answer is possible.</p>
+
+    <h2 class="tw">How to play — Murdoku</h2>
+    <p>Classic sudoku: each row, column and box contains every symbol once. Tap a cell, then a number. <b>✎ Notes</b> toggles pencil marks. Duplicates show in red as you go; <b>Check</b> compares against the true solution. Symbols mode swaps digits for the evidence locker.</p>
+  </div>
 </section>
 </main>
 
 <nav class="tabbar">
-  <button data-v="v-case" class="on"><span class="ic">🕵️</span>Cases</button>
-  <button data-v="v-sud"><span class="ic">🔢</span>Murdoku</button>
-  <button data-v="v-desk"><span class="ic">🗄️</span>Desk</button>
+  <button data-v="v-case" class="on" id="tab0"><span class="ic">🕵️</span>Casos</button>
+  <button data-v="v-riddle" id="tab1"><span class="ic">🗣️</span>Acertijos</button>
+  <button data-v="v-sud" id="tab2"><span class="ic">🔢</span>Murdoku</button>
+  <button data-v="v-desk" id="tab3"><span class="ic">🗄️</span>Despacho</button>
 </nav>
 
 <div class="overlay" id="overlay"><div class="modal" id="modal"></div></div>
@@ -341,26 +434,97 @@ function shuffle(arr,rng){for(let i=arr.length-1;i>0;i--){const j=Math.floor(rng
 function pick(arr,rng){return arr[Math.floor(rng()*arr.length)];}
 function fmt(sec){sec=Math.floor(sec);return Math.floor(sec/60)+":"+String(sec%60).padStart(2,"0");}
 function el(id){return document.getElementById(id);}
+function cap(s){return s.charAt(0).toUpperCase()+s.slice(1);}
 
 /* ---------- storage ---------- */
 const KEY="murdokus1";
 function load(){try{return JSON.parse(localStorage.getItem(KEY))||{};}catch(e){return {};}}
 function persist(){try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){}}
 const S=Object.assign({
+  lang:"es",
   caseDiff:"medium",
   caseNum:{easy:1,medium:1,hard:1},
-  caseState:{},          // per diff: {marks,struck,elapsed,solved,wrongTries}
-  sud:null,              // current sudoku state
+  caseState:{},
+  riddleDiff:"medium",
+  riddleNum:{easy:1,medium:1,hard:1},
+  riddleState:{},
+  sud:null,
   sudSize:9, sudDiff:"medium", sudSym:false,
   stats:{cases:{easy:{n:0,best:0},medium:{n:0,best:0},hard:{n:0,best:0}},
          suds:{}, streak:0, totalSec:0}
 },load());
+// patch installs saved before riddles/bestStreak existed
+S.stats.riddles=S.stats.riddles||{easy:{n:0,best:0},medium:{n:0,best:0},hard:{n:0,best:0}};
+S.stats.bestStreak=S.stats.bestStreak||0;
+S.riddleNum=S.riddleNum||{easy:1,medium:1,hard:1};
+S.riddleState=S.riddleState||{};
+S.riddleDiff=S.riddleDiff||"medium";
 
-/* ---------- data pools ---------- */
-const SUSPECTS=[["🤵","Butler"],["👩‍🍳","Chef"],["💂","Guard"],["👨‍⚕️","Doctor"],["👩‍🎤","Singer"],["🧑‍✈️","Captain"],["👵","Dowager"],["🧑‍🎨","Painter"],["👨‍🌾","Gardener"],["👩‍🏫","Governess"],["🎩","Magician"],["👨‍⚖️","Judge"]];
-const WEAPONS=[["🔪","Knife"],["🕯️","Candlestick"],["🪢","Rope"],["💉","Syringe"],["🔫","Revolver"],["⚒️","Hammer"],["🏺","Vase"],["☠️","Poison"],["✂️","Shears"],["🥖","Stale Baguette"],["🗡️","Dagger"],["🔧","Wrench"]];
-const ROOMS=[["📚","Library"],["🍽️","Dining Room"],["🌿","Conservatory"],["🍷","Wine Cellar"],["🛏️","Bedroom"],["🎱","Billiard Room"],["🖼️","Gallery"],["⛲","Garden"],["🍳","Kitchen"],["⛪","Chapel"],["🛶","Boathouse"],["🔭","Observatory"]];
-const VICTIMS=["Lord Ashby","Madame Renard","Dr. Silas Crowe","Miss Verity Lane","Colonel Fitzroy","Professor Hale","Señora Duarte","Captain Moray","Lady Winterbourne","Mr. Pemberton","Baroness Von Ecke","Sir Rupert Quill"];
+/* ---------- i18n ---------- */
+const T={
+en:{
+  sub:"flight dossier", caseNo:"CASE Nº", riddleNo:"RIDDLE Nº",
+  segCase:["Rookie","Detective","Inspector"],
+  segDiff:["Easy","Medium","Hard"],
+  d:{easy:"easy",medium:"medium",hard:"hard"},
+  hint:"Hint",check:"Check",accuse:"Accuse",skip:"Skip this case →",skipR:"Skip this riddle →",
+  newp:"New puzzle",sym:"Symbols: ",on:"on",off:"off",
+  tabs:["Cases","Riddles","Murdoku","Desk"],
+  notes:"✎ Notes",erase:"⌫ Erase",hintb:"💡 Hint",
+  caps:["Weapons × Suspects","Rooms × Suspects","Rooms × Weapons"],
+  record:"Record of service",
+  kCases:"Cases closed",kRiddles:"Riddles solved",kStreak:"Streak",kBest:"Best streak",
+  kSuds:"Sudokus solved",kTime:"Time on duty",
+  board:"Board",solvedCol:"Solved",best:"Best",
+  caseRow:{easy:"Rookie cases",medium:"Detective cases",hard:"Inspector cases"},
+  riddleRow:{easy:"Riddles (easy)",medium:"Riddles (medium)",hard:"Riddles (hard)"},
+  allClear:"All clear",okCase:"Every mark on the board is correct. Keep going.",
+  okSud:"Every entry so far is correct.",ok:"OK",
+  who:"Who did it?",notYet:"Not yet",cancel:"Cancel",
+  closed:"Case closed",innocentStamp:"Innocent",solvedStamp:"Solved",guilty:"Guilty",
+  keep:"Keep investigating",next:"Next case",nextR:"Next riddle",streak:"streak",
+  lied:"lied",told:"told the truth",
+  rules:{killerLies:"The killer lies; everyone else tells the truth.",
+         oneLies:"Exactly one of them is lying.",
+         oneTruth:"Only one of them is telling the truth."}
+},
+es:{
+  sub:"expediente de vuelo", caseNo:"CASO Nº", riddleNo:"ACERTIJO Nº",
+  segCase:["Novato","Detective","Inspector"],
+  segDiff:["Fácil","Media","Difícil"],
+  d:{easy:"fácil",medium:"media",hard:"difícil"},
+  hint:"Pista",check:"Comprobar",accuse:"Acusar",skip:"Saltar caso →",skipR:"Saltar acertijo →",
+  newp:"Nuevo puzle",sym:"Símbolos: ",on:"sí",off:"no",
+  tabs:["Casos","Acertijos","Murdoku","Despacho"],
+  notes:"✎ Notas",erase:"⌫ Borrar",hintb:"💡 Pista",
+  caps:["Armas × Sospechosos","Salas × Sospechosos","Salas × Armas"],
+  record:"Historial de servicio",
+  kCases:"Casos cerrados",kRiddles:"Acertijos resueltos",kStreak:"Racha",kBest:"Mejor racha",
+  kSuds:"Sudokus resueltos",kTime:"Tiempo de servicio",
+  board:"Tablero",solvedCol:"Resueltos",best:"Mejor",
+  caseRow:{easy:"Casos de novato",medium:"Casos de detective",hard:"Casos de inspector"},
+  riddleRow:{easy:"Acertijos (fácil)",medium:"Acertijos (media)",hard:"Acertijos (difícil)"},
+  allClear:"Todo correcto",okCase:"Todas las marcas del tablero son correctas. Sigue así.",
+  okSud:"Todas tus casillas son correctas.",ok:"OK",
+  who:"¿Quién fue?",notYet:"Aún no",cancel:"Cancelar",
+  closed:"Caso cerrado",innocentStamp:"Inocente",solvedStamp:"Resuelto",guilty:"Culpable",
+  keep:"Seguir investigando",next:"Siguiente caso",nextR:"Siguiente acertijo",streak:"racha",
+  lied:"mentía",told:"decía la verdad",
+  rules:{killerLies:"El culpable miente; los demás dicen la verdad.",
+         oneLies:"Exactamente uno de ellos miente.",
+         oneTruth:"Solo uno de ellos dice la verdad."}
+}};
+function t(k){return T[S.lang][k];}
+
+/* ---------- data pools: [emoji, en, es, artículo] ---------- */
+const SUSPECTS=[["🤵","Butler","Mayordomo","el"],["👩‍🍳","Chef","Cocinera","la"],["💂","Guard","Guardia","el"],["👨‍⚕️","Doctor","Doctor","el"],["👩‍🎤","Singer","Cantante","la"],["🧑‍✈️","Captain","Capitán","el"],["👵","Dowager","Viuda","la"],["🧑‍🎨","Painter","Artista","el"],["👨‍🌾","Gardener","Jardinero","el"],["👩‍🏫","Governess","Institutriz","la"],["🎩","Magician","Mago","el"],["👨‍⚖️","Judge","Juez","el"]];
+const WEAPONS=[["🔪","Knife","Cuchillo","el"],["🕯️","Candlestick","Candelabro","el"],["🪢","Rope","Cuerda","la"],["💉","Syringe","Jeringa","la"],["🔫","Revolver","Revólver","el"],["⚒️","Hammer","Martillo","el"],["🏺","Vase","Jarrón","el"],["☠️","Poison","Veneno","el"],["✂️","Shears","Tijeras","las"],["🥖","Stale Baguette","Baguette Dura","la"],["🗡️","Dagger","Daga","la"],["🔧","Wrench","Llave Inglesa","la"]];
+const ROOMS=[["📚","Library","Biblioteca","la"],["🍽️","Dining Room","Comedor","el"],["🌿","Conservatory","Invernadero","el"],["🍷","Wine Cellar","Bodega","la"],["🛏️","Bedroom","Dormitorio","el"],["🎱","Billiard Room","Sala de Billar","la"],["🖼️","Gallery","Galería","la"],["⛲","Garden","Jardín","el"],["🍳","Kitchen","Cocina","la"],["⛪","Chapel","Capilla","la"],["🛶","Boathouse","Embarcadero","el"],["🔭","Observatory","Observatorio","el"]];
+const VICTIMS=[["Lord Ashby","m"],["Madame Renard","f"],["Dr. Silas Crowe","m"],["Miss Verity Lane","f"],["Colonel Fitzroy","m"],["Professor Hale","m"],["Señora Duarte","f"],["Captain Moray","m"],["Lady Winterbourne","f"],["Mr. Pemberton","m"],["Baroness Von Ecke","f"],["Sir Rupert Quill","m"]];
+function dispName(x){return x[0]+" "+(S.lang==="es"?x[2]:x[1]);}
+function artName(x){return S.lang==="es"?x[3]+" "+x[0]+" "+x[2]:"the "+x[0]+" "+x[1];}
+function susName(x){return S.lang==="es"?x[3]+" "+x[0]+" "+x[2]:x[0]+" the "+x[1];}
+function foundDead(v){return S.lang==="es"?(v[1]==="f"?"fue hallada muerta":"fue hallado muerto"):"was found dead";}
 
 /* ---------- permutations ---------- */
 const PERMS={};
@@ -372,7 +536,7 @@ function perms(n){
   return PERMS[n]=r;
 }
 
-/* ---------- case generator ---------- */
+/* ---------- case generator (rng call pattern identical to v1: same seeds -> same puzzles) ---------- */
 function genCase(diff,num){
   const N=diff==="easy"?3:diff==="medium"?4:5;
   const di=diff==="easy"?1:diff==="medium"?2:3;
@@ -381,38 +545,77 @@ function genCase(diff,num){
   const wep=shuffle(WEAPONS.slice(),rng).slice(0,N);
   const loc=shuffle(ROOMS.slice(),rng).slice(0,N);
   const victim=pick(VICTIMS,rng);
-  const tw=shuffle([...Array(N).keys()],rng); // suspect -> weapon
-  const tl=shuffle([...Array(N).keys()],rng); // suspect -> room
-  const m=Math.floor(rng()*N);                // murderer
+  const tw=shuffle([...Array(N).keys()],rng);
+  const tl=shuffle([...Array(N).keys()],rng);
+  const m=Math.floor(rng()*N);
   const mLoc=tl[m], mWep=tw[m];
-  const nm=i=>sus[i][0]+" "+sus[i][1];
-  const nw=i=>"the "+wep[i][0]+" "+wep[i][1];
-  const nl=i=>"the "+loc[i][0]+" "+loc[i][1];
+  const nmE=i=>sus[i][0]+" "+sus[i][1];
+  const nwE=i=>"the "+wep[i][0]+" "+wep[i][1];
+  const nlE=i=>"the "+loc[i][0]+" "+loc[i][1];
+  const nmS=i=>sus[i][3]+" "+sus[i][0]+" "+sus[i][2];
+  const nwS=i=>wep[i][3]+" "+wep[i][0]+" "+wep[i][2];
+  const nlS=i=>loc[i][3]+" "+loc[i][0]+" "+loc[i][2];
+  const seen=i=>sus[i][3]==="la"?"vista":"visto";
 
-  // clue pool
   const pool=[];
   for(let s=0;s<N;s++)for(let w=0;w<N;w++){
-    if(tw[s]!==w)pool.push({k:"neg",t:pick([nm(s)+" was never seen with "+nw(w)+".",nm(s)+" did not carry "+nw(w)+"."],rng),f:(W,L)=>W[s]!==w});
-    else pool.push({k:"pos",t:nm(s)+" was carrying "+nw(w)+".",f:(W,L)=>W[s]===w});
+    if(tw[s]!==w){
+      const vi=Math.floor(rng()*2); // one rng call, matching v1's pick()
+      pool.push({k:"neg",
+        en:vi?nmE(s)+" did not carry "+nwE(w)+".":nmE(s)+" was never seen with "+nwE(w)+".",
+        es:vi?cap(nmS(s))+" no llevaba "+nwS(w)+".":cap(nmS(s))+" nunca fue "+seen(s)+" con "+nwS(w)+".",
+        f:(W,L)=>W[s]!==w});
+    }else{
+      pool.push({k:"pos",
+        en:nmE(s)+" was carrying "+nwE(w)+".",
+        es:cap(nmS(s))+" llevaba "+nwS(w)+".",
+        f:(W,L)=>W[s]===w});
+    }
   }
   for(let s=0;s<N;s++)for(let l=0;l<N;l++){
-    if(tl[s]!==l)pool.push({k:"neg",t:pick([nm(s)+" never set foot in "+nl(l)+".",nm(s)+" was not in "+nl(l)+"."],rng),f:(W,L)=>L[s]!==l});
-    else pool.push({k:"pos",t:nm(s)+" was in "+nl(l)+".",f:(W,L)=>L[s]===l});
+    if(tl[s]!==l){
+      const vi=Math.floor(rng()*2);
+      pool.push({k:"neg",
+        en:vi?nmE(s)+" was not in "+nlE(l)+".":nmE(s)+" never set foot in "+nlE(l)+".",
+        es:vi?cap(nmS(s))+" no estaba en "+nlS(l)+".":cap(nmS(s))+" nunca pisó "+nlS(l)+".",
+        f:(W,L)=>L[s]!==l});
+    }else{
+      pool.push({k:"pos",
+        en:nmE(s)+" was in "+nlE(l)+".",
+        es:cap(nmS(s))+" estaba en "+nlS(l)+".",
+        f:(W,L)=>L[s]===l});
+    }
   }
   for(let w=0;w<N;w++){
     const owner=tw.indexOf(w);
-    pool.push({k:"crosspos",t:capitalize(nw(w))+" was found in "+nl(tl[owner])+".",f:(W,L)=>L[W.indexOf(w)]===tl[owner]});
-    for(let l=0;l<N;l++)if(tl[owner]!==l)
-      pool.push({k:"crossneg",t:pick([capitalize(nw(w))+" was not in "+nl(l)+".","Whoever carried "+nw(w)+" avoided "+nl(l)+"."],rng),f:(W,L)=>L[W.indexOf(w)]!==l});
+    pool.push({k:"crosspos",
+      en:cap(nwE(w))+" was found in "+nlE(tl[owner])+".",
+      es:"Quien llevaba "+nwS(w)+" estaba en "+nlS(tl[owner])+".",
+      f:(W,L)=>L[W.indexOf(w)]===tl[owner]});
+    for(let l=0;l<N;l++)if(tl[owner]!==l){
+      const vi=Math.floor(rng()*2);
+      pool.push({k:"crossneg",
+        en:vi?cap(nwE(w))+" was not in "+nlE(l)+".":"Whoever carried "+nwE(w)+" avoided "+nlE(l)+".",
+        es:vi?"Quien llevaba "+nwS(w)+" no estaba en "+nlS(l)+".":"Quien llevaba "+nwS(w)+" evitó "+nlS(l)+".",
+        f:(W,L)=>L[W.indexOf(w)]!==l});
+    }
     let s2=Math.floor(rng()*N); if(s2===owner)s2=(s2+1)%N;
     const pair=shuffle([owner,s2],rng);
-    pool.push({k:"either",t:"Either "+nm(pair[0])+" or "+nm(pair[1])+" carried "+nw(w)+".",f:(W,L)=>W[pair[0]]===w||W[pair[1]]===w});
+    pool.push({k:"either",
+      en:"Either "+nmE(pair[0])+" or "+nmE(pair[1])+" carried "+nwE(w)+".",
+      es:"O "+nmS(pair[0])+" o "+nmS(pair[1])+" llevaba "+nwS(w)+".",
+      f:(W,L)=>W[pair[0]]===w||W[pair[1]]===w});
   }
   for(let s=0;s<N;s++)if(s!==m)
-    pool.push({k:"innocent",t:nm(s)+" has an alibi — innocent.",f:(W,L)=>L[s]!==mLoc});
-  pool.push({k:"killer",t:"The killer was carrying "+nw(mWep)+".",f:(W,L)=>W[L.indexOf(mLoc)]===mWep});
+    pool.push({k:"innocent",
+      en:nmE(s)+" has an alibi — innocent.",
+      es:cap(nmS(s))+" tiene coartada: es inocente.",
+      f:(W,L)=>L[s]!==mLoc});
+  pool.push({k:"killer",
+    en:"The killer was carrying "+nwE(mWep)+".",
+    es:"El asesino llevaba "+nwS(mWep)+".",
+    f:(W,L)=>W[L.indexOf(mLoc)]===mWep});
 
-  // difficulty-weighted ordering (lower = tried first)
   const wgt={
     easy:  {pos:2, neg:0, crosspos:1, crossneg:3, either:3, innocent:2, killer:4},
     medium:{pos:4, neg:1, crosspos:0, crossneg:0, either:1, innocent:1, killer:1},
@@ -421,7 +624,6 @@ function genCase(diff,num){
   pool.forEach(c=>c.o=wgt[c.k]+rng()*1.6);
   pool.sort((a,b)=>a.o-b.o);
 
-  // greedy: keep clues that narrow the candidate set until unique
   const P=perms(N);
   let cand=[];
   for(let i=0;i<P.length;i++)for(let j=0;j<P.length;j++)cand.push([i,j]);
@@ -431,7 +633,6 @@ function genCase(diff,num){
     const f=cand.filter(p=>c.f(P[p[0]],P[p[1]]));
     if(f.length<cand.length){chosen.push(c);cand=f;}
   }
-  // prune redundant clues
   function uniqueWith(cl){
     let n=0;
     for(let i=0;i<P.length;i++)for(let j=0;j<P.length;j++){
@@ -446,18 +647,16 @@ function genCase(diff,num){
     if(uniqueWith(rest))chosen.splice(i,1);
   }
   shuffle(chosen,rng);
-  return {N,diff,num,sus,wep,loc,victim,tw,tl,m,mLoc,mWep,clues:chosen.map(c=>c.t),
-          clueFns:chosen.map(c=>c.f)};
+  return {N,diff,num,sus,wep,loc,victim,tw,tl,m,mLoc,mWep,
+          clues:chosen.map(c=>({en:c.en,es:c.es}))};
 }
-function capitalize(s){return s.charAt(0).toUpperCase()+s.slice(1);}
 
 /* ---------- case UI ---------- */
-let C=null;          // current puzzle
-let CS=null;         // current mutable state {marks,struck,elapsed,solved,wrongTries}
+let C=null, CS=null;
 const BLOCKS=[
-  {key:"sw",rows:"wep",cols:"sus",cap:"Weapons × Suspects",truth:(r,c)=>C.tw[c]===r},
-  {key:"sl",rows:"loc",cols:"sus",cap:"Rooms × Suspects",  truth:(r,c)=>C.tl[c]===r},
-  {key:"wl",rows:"loc",cols:"wep",cap:"Rooms × Weapons",   truth:(r,c)=>C.tl[C.tw.indexOf(c)]===r}
+  {key:"sw",rows:"wep",cols:"sus",cap:0,truth:(r,c)=>C.tw[c]===r},
+  {key:"sl",rows:"loc",cols:"sus",cap:1,truth:(r,c)=>C.tl[c]===r},
+  {key:"wl",rows:"loc",cols:"wep",cap:2,truth:(r,c)=>C.tl[C.tw.indexOf(c)]===r}
 ];
 function blankMarks(N){const o={};for(const b of BLOCKS)o[b.key]=Array.from({length:N},()=>Array(N).fill(0));return o;}
 
@@ -469,25 +668,32 @@ function loadCase(){
   else{CS={num,marks:blankMarks(C.N),struck:Array(C.clues.length).fill(false),elapsed:0,solved:false,wrongTries:0};S.caseState[d]=CS;}
   renderCase();
 }
+function victimLine(){
+  const v=C.victim, room=artName(C.loc[C.mLoc]);
+  if(S.lang==="es")
+    return "<b>"+v[0]+"</b> "+foundDead(v)+" en <b>"+room+"</b>. Quien estuviera en esa sala es el asesino.";
+  return "<b>"+v[0]+"</b> was found dead in <b>"+room+"</b>. Whoever was in that room is the killer.";
+}
 function renderCase(){
-  el("casenum").textContent="CASE Nº "+C.num;
+  if(!C)return;
+  el("casenum").textContent=t("caseNo")+" "+C.num;
   el("casetimer").textContent=fmt(CS.elapsed);
-  el("victimline").innerHTML="<b>"+C.victim+"</b> was found dead in <b>"+C.loc[C.mLoc][0]+" "+C.loc[C.mLoc][1]+"</b>. Whoever was in that room is the killer.";
+  el("victimline").innerHTML=victimLine();
   el("legend").innerHTML=
-    C.sus.map(x=>"<span>"+x[0]+" "+x[1]+"</span>").join("")+
-    C.wep.map(x=>"<span>"+x[0]+" "+x[1]+"</span>").join("")+
-    C.loc.map(x=>"<span>"+x[0]+" "+x[1]+"</span>").join("");
+    C.sus.map(x=>"<span>"+dispName(x)+"</span>").join("")+
+    C.wep.map(x=>"<span>"+dispName(x)+"</span>").join("")+
+    C.loc.map(x=>"<span>"+dispName(x)+"</span>").join("");
   const ol=el("clues");ol.innerHTML="";
-  C.clues.forEach((t,i)=>{
+  C.clues.forEach((c,i)=>{
     const li=document.createElement("li");
-    li.textContent=t;
+    li.textContent=c[S.lang];
     if(CS.struck[i])li.classList.add("struck");
     li.onclick=()=>{CS.struck[i]=!CS.struck[i];li.classList.toggle("struck");persist();};
     ol.appendChild(li);
   });
   const area=el("gridarea");area.innerHTML="";
   for(const b of BLOCKS){
-    const cap=document.createElement("div");cap.className="blockcap tw";cap.textContent=b.cap;area.appendChild(cap);
+    const capd=document.createElement("div");capd.className="blockcap tw";capd.textContent=t("caps")[b.cap];area.appendChild(capd);
     const g=document.createElement("div");g.className="gridblock";
     g.style.gridTemplateColumns="minmax(34px,44px) repeat("+C.N+",minmax(34px,52px))";
     g.appendChild(cell("gcorner",""));
@@ -517,7 +723,7 @@ function tapCell(b,d,r,c){
   const m=CS.marks[b.key];
   m[r][c]=(m[r][c]+1)%3;
   paint(d,m[r][c]);
-  if(m[r][c]===2){ // auto-cross row & col
+  if(m[r][c]===2){
     for(let i=0;i<C.N;i++){
       if(i!==c&&m[r][i]===0){m[r][i]=1;repaint(b.key,r,i);}
       if(i!==r&&m[i][c]===0){m[i][c]=1;repaint(b.key,i,c);}
@@ -531,19 +737,18 @@ function repaint(bk,r,c){
 }
 function caseHint(){
   if(CS.solved)return;
-  // 1) fix a wrong mark; 2) reveal an unmarked ✓; 3) reveal an unmarked ✗
   for(const pass of [0,1,2]){
     for(const b of BLOCKS)for(let r=0;r<C.N;r++)for(let c=0;c<C.N;c++){
-      const v=CS.marks[b.key][r][c],t=b.truth(r,c);
-      const hit=pass===0?(v===2&&!t)||(v===1&&t)
-              :pass===1?(v===0&&t)
-              :(v===0&&!t);
+      const v=CS.marks[b.key][r][c],tr=b.truth(r,c);
+      const hit=pass===0?(v===2&&!tr)||(v===1&&tr)
+              :pass===1?(v===0&&tr)
+              :(v===0&&!tr);
       if(hit){
-        CS.marks[b.key][r][c]=t?2:1;
+        CS.marks[b.key][r][c]=tr?2:1;
         repaint(b.key,r,c);
         const d=document.querySelector('.gcell[data-b="'+b.key+'"][data-r="'+r+'"][data-c="'+c+'"]');
         if(d){d.classList.add("flash");setTimeout(()=>d.classList.remove("flash"),900);}
-        if(t){ // auto-cross around revealed ✓
+        if(tr){
           const m=CS.marks[b.key];
           for(let i=0;i<C.N;i++){
             if(i!==c&&m[r][i]===0){m[r][i]=1;repaint(b.key,r,i);}
@@ -566,37 +771,47 @@ function caseCheck(){
       if(d){d.classList.add("wrong");setTimeout(()=>{d.classList.remove("wrong");},1400);}
     }
   }
-  if(!bad)toastModal("<h3 class='tw'>All clear</h3><p>Every mark on the board is correct. Keep going.</p>");
+  if(!bad)toastModal("<h3 class='tw'>"+t("allClear")+"</h3><p>"+t("okCase")+"</p>");
 }
 function accuse(){
   if(CS.solved)return;
-  let html="<h3 class='tw'>Who did it?</h3><p>"+C.victim+" died in "+C.loc[C.mLoc][0]+" "+C.loc[C.mLoc][1]+".</p><div class='suspects'>";
-  C.sus.forEach((s,i)=>{html+="<button data-s="+i+"><span class='e'>"+s[0]+"</span> "+s[1]+"</button>";});
-  html+="</div><div class='actions'><button class='btn quiet' id='m-close'>Not yet</button></div>";
+  const died=S.lang==="es"?" murió en ":" died in ";
+  let html="<h3 class='tw'>"+t("who")+"</h3><p>"+C.victim[0]+died+artName(C.loc[C.mLoc])+".</p><div class='suspects'>";
+  C.sus.forEach((s,i)=>{html+="<button data-s="+i+"><span class='e'>"+s[0]+"</span> "+(S.lang==="es"?s[2]:s[1])+"</button>";});
+  html+="</div><div class='actions'><button class='btn quiet' id='m-close'>"+t("notYet")+"</button></div>";
   showModal(html);
   el("modal").querySelectorAll(".suspects button").forEach(b=>{
     b.onclick=()=>verdict(+b.dataset.s);
   });
   el("m-close").onclick=hideModal;
 }
+function bumpStreak(){
+  S.stats.streak++;
+  if(S.stats.streak>S.stats.bestStreak)S.stats.bestStreak=S.stats.streak;
+}
 function verdict(s){
   if(s===C.m){
     CS.solved=true;
     const st=S.stats.cases[C.diff];
-    st.n++; S.stats.streak++;
+    st.n++; bumpStreak();
     if(!st.best||CS.elapsed<st.best)st.best=CS.elapsed;
     persist();
-    showModal("<div style='text-align:center'><div class='bigstamp tw good'>Case closed</div></div>"+
-      "<p style='text-align:center'>It was <b>"+C.sus[s][0]+" the "+C.sus[s][1]+"</b>, with "+
-      C.wep[C.mWep][0]+" the "+C.wep[C.mWep][1]+", in "+C.loc[C.mLoc][0]+" the "+C.loc[C.mLoc][1]+".<br>"+
-      "<span class='mono'>"+fmt(CS.elapsed)+"</span> · streak "+S.stats.streak+"</p>"+
-      "<div class='actions'><button class='btn primary' id='m-next'>Next case</button></div>");
+    const line=S.lang==="es"
+      ?"Fue <b>"+susName(C.sus[s])+"</b>, con "+artName(C.wep[C.mWep])+", en "+artName(C.loc[C.mLoc])+"."
+      :"It was <b>"+susName(C.sus[s])+"</b>, with "+artName(C.wep[C.mWep])+", in "+artName(C.loc[C.mLoc])+".";
+    showModal("<div style='text-align:center'><div class='bigstamp tw good'>"+t("closed")+"</div></div>"+
+      "<p style='text-align:center'>"+line+"<br>"+
+      "<span class='mono'>"+fmt(CS.elapsed)+"</span> · "+t("streak")+" "+S.stats.streak+"</p>"+
+      "<div class='actions'><button class='btn primary' id='m-next'>"+t("next")+"</button></div>");
     el("m-next").onclick=()=>{hideModal();nextCase();};
   }else{
     CS.wrongTries++; S.stats.streak=0; persist();
-    showModal("<div style='text-align:center'><div class='bigstamp tw'>Innocent</div></div>"+
-      "<p style='text-align:center'>"+C.sus[s][0]+" the "+C.sus[s][1]+" has a solid alibi. Streak lost — back to the board.</p>"+
-      "<div class='actions'><button class='btn' id='m-back'>Keep investigating</button></div>");
+    const line=S.lang==="es"
+      ?cap(susName(C.sus[s]))+" tiene una coartada sólida. Racha perdida — vuelve al tablero."
+      :susName(C.sus[s])+" has a solid alibi. Streak lost — back to the board.";
+    showModal("<div style='text-align:center'><div class='bigstamp tw'>"+t("innocentStamp")+"</div></div>"+
+      "<p style='text-align:center'>"+line+"</p>"+
+      "<div class='actions'><button class='btn' id='m-back'>"+t("keep")+"</button></div>");
     el("m-back").onclick=hideModal;
   }
 }
@@ -606,10 +821,157 @@ function nextCase(){
   persist();loadCase();
 }
 
+/* ---------- riddle generator (testimony puzzles, Murdoku book style) ---------- */
+function genRiddle(diff,num){
+  const N=diff==="easy"?3:diff==="medium"?4:5;
+  const di=diff==="easy"?5:diff==="medium"?6:7;
+  const rng=mulberry32((num*83492791 ^ di*49979687)>>>0);
+  const sus=shuffle(SUSPECTS.slice(),rng).slice(0,N);
+  const victim=pick(VICTIMS,rng);
+  const room=pick(ROOMS,rng);
+  const rule=diff==="easy"?"killerLies"
+            :diff==="medium"?pick(["oneLies","killerLies"],rng)
+            :pick(["oneTruth","oneLies"],rng);
+  function evalSt(st,i,k){
+    const s=st[i];
+    if(s.type==="self")return i!==k;
+    if(s.type==="accuse")return s.target===k;
+    if(s.type==="defend")return s.target!==k;
+    if(s.type==="liar")return !evalSt(st,s.target,k);
+    return evalSt(st,s.target,k); // honest
+  }
+  function solutions(st){
+    const sols=[];
+    for(let k=0;k<N;k++){
+      let lies=0,ok=true;
+      for(let i=0;i<N;i++){
+        const tr=evalSt(st,i,k);
+        if(!tr)lies++;
+        if(rule==="killerLies"&&tr!==(i!==k)){ok=false;break;}
+      }
+      if(rule==="oneLies")ok=lies===1;
+      if(rule==="oneTruth")ok=(N-lies)===1;
+      if(ok)sols.push(k);
+    }
+    return sols;
+  }
+  let st=null,killer=-1;
+  for(let att=0;att<3000;att++){
+    const cand=[];
+    for(let i=0;i<N;i++){
+      const r=rng();
+      if(r<0.3)cand.push({type:"self"});
+      else if(r<0.65){let j=Math.floor(rng()*(N-1));if(j>=i)j++;cand.push({type:"accuse",target:j});}
+      else{let j=Math.floor(rng()*(N-1));if(j>=i)j++;cand.push({type:"defend",target:j});}
+    }
+    if(diff==="hard"){
+      const i=Math.floor(rng()*N);
+      let j=Math.floor(rng()*(N-1));if(j>=i)j++;
+      cand[i]={type:rng()<0.5?"liar":"honest",target:j};
+    }
+    const sols=solutions(cand);
+    if(sols.length===1){st=cand;killer=sols[0];break;}
+  }
+  if(!st){ // deterministic fallback: everyone accuses 0 except 0, rule oneLies
+    st=[{type:"self"}];
+    for(let i=1;i<N;i++)st.push({type:"accuse",target:0});
+    killer=0;
+  }
+  const truth=[...Array(N)].map((_,i)=>evalSt(st,i,killer));
+  return {N,diff,num,sus,victim,room,rule,st,killer,truth};
+}
+function stmtText(R,i){
+  const s=R.st[i], es=S.lang==="es";
+  const nm=j=>es?cap(susName(R.sus[j])):susName(R.sus[j]);
+  if(s.type==="self")return es?"Yo no fui.":"It wasn't me.";
+  if(s.type==="accuse")return es?"Fue "+susName(R.sus[s.target])+".":nm(s.target)+" did it.";
+  if(s.type==="defend")return es?nm(s.target)+" no fue.":nm(s.target)+" didn't do it.";
+  if(s.type==="liar")return es?nm(s.target)+" miente.":nm(s.target)+" is lying.";
+  return es?nm(s.target)+" dice la verdad.":nm(s.target)+" is telling the truth.";
+}
+
+/* ---------- riddle UI ---------- */
+let R=null, RS=null;
+function loadRiddle(){
+  const d=S.riddleDiff,num=S.riddleNum[d];
+  R=genRiddle(d,num);
+  const saved=S.riddleState[d];
+  if(saved&&saved.num===num){RS=saved;}
+  else{RS={num,elapsed:0,solved:false,fails:0};S.riddleState[d]=RS;}
+  renderRiddle();
+}
+function renderRiddle(){
+  if(!R)return;
+  el("riddlenum").textContent=t("riddleNo")+" "+R.num;
+  el("riddletimer").textContent=fmt(RS.elapsed);
+  const v=R.victim;
+  el("r-intro").innerHTML=S.lang==="es"
+    ?"<b>"+v[0]+"</b> "+foundDead(v)+" en <b>"+artName(R.room)+"</b>. "+R.N+" sospechosos, "+R.N+" declaraciones."
+    :"<b>"+v[0]+"</b> was found dead in <b>"+artName(R.room)+"</b>. "+R.N+" suspects, "+R.N+" statements.";
+  el("r-rule").textContent=t("rules")[R.rule];
+  const box=el("r-testimonies");box.innerHTML="";
+  R.sus.forEach((x,i)=>{
+    const d=document.createElement("div");
+    d.className="testi";
+    let inner="<span class='e'>"+x[0]+"</span><span class='col'><span class='who'>"+(S.lang==="es"?x[2]:x[1])+"</span><span class='q'>“"+stmtText(R,i)+"”</span></span>";
+    if(RS.solved){
+      d.classList.add(R.truth[i]?"truth":"lie");
+      if(i===R.killer)d.classList.add("guilty");
+      inner+="<span class='res'>"+(R.truth[i]?"✓":"✗")+"</span>";
+    }
+    d.innerHTML=inner;
+    if(!RS.solved)d.onclick=()=>confirmRiddleAccuse(i);
+    box.appendChild(d);
+  });
+}
+function confirmRiddleAccuse(i){
+  const q=S.lang==="es"?"¿Acusar a "+susName(R.sus[i])+"?":"Accuse "+susName(R.sus[i])+"?";
+  showModal("<h3 class='tw'>"+t("who")+"</h3><p>"+q+"</p>"+
+    "<div class='actions'><button class='btn quiet' id='m-cancel'>"+t("cancel")+"</button>"+
+    "<button class='btn primary' id='m-go'>"+t("accuse")+"</button></div>");
+  el("m-cancel").onclick=hideModal;
+  el("m-go").onclick=()=>{hideModal();riddleVerdict(i);};
+}
+function riddleVerdict(i){
+  if(RS.solved)return;
+  if(i===R.killer){
+    RS.solved=true;
+    const st=S.stats.riddles[R.diff];
+    st.n++; bumpStreak();
+    if(!st.best||RS.elapsed<st.best)st.best=RS.elapsed;
+    persist();
+    renderRiddle();
+    let reveal="<div class='reveal'>";
+    R.sus.forEach((x,j)=>{
+      reveal+="<div><span>"+x[0]+" "+(S.lang==="es"?x[2]:x[1])+"</span><span class='"+(R.truth[j]?"ok":"no")+"'>"+(R.truth[j]?"✓ "+t("told"):"✗ "+t("lied"))+"</span></div>";
+    });
+    reveal+="</div>";
+    const line=S.lang==="es"?"Era <b>"+susName(R.sus[i])+"</b>.":"It was <b>"+susName(R.sus[i])+"</b>.";
+    showModal("<div style='text-align:center'><div class='bigstamp tw good'>"+t("guilty")+"</div></div>"+
+      "<p style='text-align:center'>"+line+"<br><span class='mono'>"+fmt(RS.elapsed)+"</span> · "+t("streak")+" "+S.stats.streak+"</p>"+
+      reveal+
+      "<div class='actions'><button class='btn primary' id='m-nextr'>"+t("nextR")+"</button></div>");
+    el("m-nextr").onclick=()=>{hideModal();nextRiddle();};
+  }else{
+    RS.fails++; S.stats.streak=0; persist();
+    const line=S.lang==="es"
+      ?cap(susName(R.sus[i]))+" no fue. Racha perdida — vuelve a leer las declaraciones."
+      :cap(susName(R.sus[i]))+" is innocent. Streak lost — read the statements again.";
+    showModal("<div style='text-align:center'><div class='bigstamp tw'>"+t("innocentStamp")+"</div></div>"+
+      "<p style='text-align:center'>"+line+"</p>"+
+      "<div class='actions'><button class='btn' id='m-back'>"+t("keep")+"</button></div>");
+    el("m-back").onclick=hideModal;
+  }
+}
+function nextRiddle(){
+  S.riddleNum[S.riddleDiff]++;
+  delete S.riddleState[S.riddleDiff];
+  persist();loadRiddle();
+}
+
 /* ---------- sudoku ---------- */
 function boxDims(n){return n===6?[2,3]:[3,3];}
 function solveCount(bd,n,bR,bC,limit){
-  // count solutions up to limit, MRV backtracking
   const rows=Array(n).fill(0),cols=Array(n).fill(0),boxes=Array(n).fill(0);
   const bi=i=>Math.floor(Math.floor(i/n)/bR)*(n/bC)+Math.floor((i%n)/bC);
   for(let i=0;i<n*n;i++)if(bd[i]){const m=1<<bd[i];rows[Math.floor(i/n)]|=m;cols[i%n]|=m;boxes[bi(i)]|=m;}
@@ -642,7 +1004,6 @@ function genSudoku(n,diff,rng){
   const [bR,bC]=boxDims(n);
   const bd=Array(n*n).fill(0);
   const bi=i=>Math.floor(Math.floor(i/n)/bR)*(n/bC)+Math.floor((i%n)/bC);
-  // fill
   (function fill(i){
     if(i===n*n)return true;
     const r=Math.floor(i/n),c=i%n,b=bi(i);
@@ -658,7 +1019,6 @@ function genSudoku(n,diff,rng){
     return false;
   })(0);
   const sol=bd.slice();
-  // dig
   const target=n===6?{easy:16,medium:13,hard:10}[diff]:{easy:40,medium:32,hard:26}[diff];
   const order=shuffle([...Array(n*n).keys()],rng);
   let clues=n*n;
@@ -681,7 +1041,7 @@ function newSudoku(){
 }
 function renderSudoku(){
   const P=S.sud;if(!P)return;
-  el("sudlabel").textContent="MURDOKU · "+P.n+"×"+P.n+" "+P.diff;
+  el("sudlabel").textContent="MURDOKU · "+P.n+"×"+P.n+" "+t("d")[P.diff];
   el("sudtimer").textContent=fmt(P.elapsed);
   const bd=el("sboard");bd.innerHTML="";
   bd.style.gridTemplateColumns="repeat("+P.n+",1fr)";
@@ -733,12 +1093,12 @@ function renderPad(){
     pad.appendChild(b);
   }
   const pen=document.createElement("button");pen.className="tool"+(P.pencil?" on":"");
-  pen.textContent="✎ Notes";pen.onclick=()=>{P.pencil=!P.pencil;persist();renderPad();};
+  pen.textContent=t("notes");pen.onclick=()=>{P.pencil=!P.pencil;persist();renderPad();};
   pad.appendChild(pen);
-  const er=document.createElement("button");er.className="tool";er.textContent="⌫ Erase";
+  const er=document.createElement("button");er.className="tool";er.textContent=t("erase");
   er.onclick=()=>{if(sudSel<0||P.givens[sudSel])return;P.vals[sudSel]=0;P.notes[sudSel]=0;persist();renderSudoku();};
   pad.appendChild(er);
-  const hi=document.createElement("button");hi.className="tool";hi.textContent="💡 Hint";
+  const hi=document.createElement("button");hi.className="tool";hi.textContent=t("hintb");
   hi.onclick=()=>{
     let i=sudSel;
     if(i<0||P.givens[i]||P.vals[i]===P.sol[i]){
@@ -756,7 +1116,6 @@ function place(d){
   P.vals[sudSel]=P.vals[sudSel]===d?0:d;
   if(P.vals[sudSel]){
     P.notes[sudSel]=0;
-    // clear this digit from peer notes
     const bi=i=>Math.floor(Math.floor(i/P.n)/P.bR)*(P.n/P.bC)+Math.floor((i%P.n)/P.bC);
     for(let j=0;j<P.n*P.n;j++){
       if(Math.floor(j/P.n)===Math.floor(sudSel/P.n)||j%P.n===sudSel%P.n||bi(j)===bi(sudSel))
@@ -775,9 +1134,9 @@ function afterPlace(){
     S.stats.suds[k].n++;
     if(!S.stats.suds[k].best||P.elapsed<S.stats.suds[k].best)S.stats.suds[k].best=P.elapsed;
     persist();
-    showModal("<div style='text-align:center'><div class='bigstamp tw good'>Solved</div></div>"+
+    showModal("<div style='text-align:center'><div class='bigstamp tw good'>"+t("solvedStamp")+"</div></div>"+
       "<p style='text-align:center' class='mono'>"+fmt(P.elapsed)+"</p>"+
-      "<div class='actions'><button class='btn primary' id='m-snew'>New puzzle</button></div>");
+      "<div class='actions'><button class='btn primary' id='m-snew'>"+t("newp")+"</button></div>");
     el("m-snew").onclick=()=>{hideModal();newSudoku();};
   }
 }
@@ -788,35 +1147,77 @@ function sudCheck(){
     if(P.vals[i]&&P.vals[i]!==P.sol[i]){bad++;cells[i].classList.add("wrongchk");
       (function(cell){setTimeout(()=>cell.classList.remove("wrongchk"),1400);})(cells[i]);}
   }
-  if(!bad)toastModal("<h3 class='tw'>All clear</h3><p>Every entry so far is correct.</p>");
+  if(!bad)toastModal("<h3 class='tw'>"+t("allClear")+"</h3><p>"+t("okSud")+"</p>");
 }
 
 /* ---------- desk ---------- */
 function renderDesk(){
   const st=S.stats;
-  const cs=st.cases.easy.n+st.cases.medium.n+st.cases.hard.n;
-  el("st-cases").textContent=cs;
+  el("st-cases").textContent=st.cases.easy.n+st.cases.medium.n+st.cases.hard.n;
+  el("st-riddles").textContent=st.riddles.easy.n+st.riddles.medium.n+st.riddles.hard.n;
   el("st-streak").textContent=st.streak;
+  el("st-beststreak").textContent=st.bestStreak;
   let sd=0;for(const k in st.suds)sd+=st.suds[k].n;
   el("st-suds").textContent=sd;
   el("st-time").innerHTML=Math.floor(st.totalSec/60)+"<small>m</small>";
-  let rows="<tr><th>Board</th><th style='text-align:right'>Solved</th><th style='text-align:right'>Best</th></tr>";
-  [["Rookie cases","easy"],["Detective cases","medium"],["Inspector cases","hard"]].forEach(([lbl,d])=>{
+  let rows="<tr><th>"+t("board")+"</th><th style='text-align:right'>"+t("solvedCol")+"</th><th style='text-align:right'>"+t("best")+"</th></tr>";
+  ["easy","medium","hard"].forEach(d=>{
     const x=st.cases[d];
-    rows+="<tr><td>"+lbl+"</td><td class='num'>"+x.n+"</td><td class='num mono'>"+(x.best?fmt(x.best):"—")+"</td></tr>";
+    rows+="<tr><td>"+t("caseRow")[d]+"</td><td class='num'>"+x.n+"</td><td class='num mono'>"+(x.best?fmt(x.best):"—")+"</td></tr>";
+  });
+  ["easy","medium","hard"].forEach(d=>{
+    const x=st.riddles[d];
+    rows+="<tr><td>"+t("riddleRow")[d]+"</td><td class='num'>"+x.n+"</td><td class='num mono'>"+(x.best?fmt(x.best):"—")+"</td></tr>";
   });
   const keys=Object.keys(st.suds).sort();
   for(const k of keys){
     const x=st.suds[k];
-    rows+="<tr><td>Murdoku "+k.replace("-"," · ")+"</td><td class='num'>"+x.n+"</td><td class='num mono'>"+(x.best?fmt(x.best):"—")+"</td></tr>";
+    const parts=k.split("-");
+    rows+="<tr><td>Murdoku "+parts[0]+" · "+t("d")[parts[1]]+"</td><td class='num'>"+x.n+"</td><td class='num mono'>"+(x.best?fmt(x.best):"—")+"</td></tr>";
   }
   el("st-table").innerHTML=rows;
+}
+
+/* ---------- i18n: apply to static chrome ---------- */
+function applyLang(){
+  document.body.setAttribute("data-lang",S.lang);
+  document.documentElement.setAttribute("lang",S.lang);
+  el("hdrsub").textContent=t("sub");
+  el("caseseg").querySelectorAll("button").forEach((b,i)=>{b.textContent=t("segCase")[i];});
+  el("riddleseg").querySelectorAll("button").forEach((b,i)=>{b.textContent=t("segDiff")[i];});
+  el("suddiff").querySelectorAll("button").forEach((b,i)=>{b.textContent=t("segDiff")[i];});
+  el("b-hint").textContent=t("hint");
+  el("b-check").textContent=t("check");
+  el("b-accuse").textContent=t("accuse");
+  el("b-skip").textContent=t("skip");
+  el("r-skip").textContent=t("skipR");
+  el("s-new").textContent=t("newp");
+  el("s-check").textContent=t("check");
+  el("s-sym").textContent=t("sym")+(S.sudSym?t("on"):t("off"));
+  ["tab0","tab1","tab2","tab3"].forEach((id,i)=>{
+    const ic=el(id).querySelector(".ic").textContent;
+    el(id).innerHTML="<span class='ic'>"+ic+"</span>"+t("tabs")[i];
+  });
+  el("h-record").textContent=t("record");
+  el("k-cases").textContent=t("kCases");
+  el("k-riddles").textContent=t("kRiddles");
+  el("k-streak").textContent=t("kStreak");
+  el("k-beststreak").textContent=t("kBest");
+  el("k-suds").textContent=t("kSuds");
+  el("k-time").textContent=t("kTime");
+  el("langseg").querySelectorAll("button").forEach(b=>{
+    b.classList.toggle("on",b.dataset.l===S.lang);
+  });
+  renderCase();
+  renderRiddle();
+  renderSudoku();
+  renderDesk();
 }
 
 /* ---------- modal ---------- */
 function showModal(html){el("modal").innerHTML=html;el("overlay").classList.add("on");}
 function hideModal(){el("overlay").classList.remove("on");}
-function toastModal(html){showModal(html+"<div class='actions'><button class='btn' id='m-ok'>OK</button></div>");el("m-ok").onclick=hideModal;}
+function toastModal(html){showModal(html+"<div class='actions'><button class='btn' id='m-ok'>"+t("ok")+"</button></div>");el("m-ok").onclick=hideModal;}
 el("overlay").addEventListener("click",e=>{if(e.target===el("overlay"))hideModal();});
 
 /* ---------- tabs & segs ---------- */
@@ -830,13 +1231,18 @@ document.querySelectorAll("nav.tabbar button").forEach(b=>{
     if(activeView==="v-desk")renderDesk();
   };
 });
-el("caseseg").querySelectorAll("button").forEach(b=>{
-  if(b.dataset.d===S.caseDiff){el("caseseg").querySelectorAll("button").forEach(x=>x.classList.remove("on"));b.classList.add("on");}
-  b.onclick=()=>{
-    el("caseseg").querySelectorAll("button").forEach(x=>x.classList.remove("on"));
-    b.classList.add("on");S.caseDiff=b.dataset.d;persist();loadCase();
-  };
-});
+function wireSeg(segId,get,set){
+  el(segId).querySelectorAll("button").forEach(b=>{
+    if(b.dataset.d===get()){el(segId).querySelectorAll("button").forEach(x=>x.classList.remove("on"));b.classList.add("on");}
+    b.onclick=()=>{
+      el(segId).querySelectorAll("button").forEach(x=>x.classList.remove("on"));
+      b.classList.add("on");set(b.dataset.d);
+    };
+  });
+}
+wireSeg("caseseg",()=>S.caseDiff,d=>{S.caseDiff=d;persist();loadCase();});
+wireSeg("riddleseg",()=>S.riddleDiff,d=>{S.riddleDiff=d;persist();loadRiddle();});
+wireSeg("suddiff",()=>S.sudDiff,d=>{S.sudDiff=d;persist();newSudoku();});
 el("sudsize").querySelectorAll("button").forEach(b=>{
   if(+b.dataset.n===S.sudSize){el("sudsize").querySelectorAll("button").forEach(x=>x.classList.remove("on"));b.classList.add("on");}
   b.onclick=()=>{
@@ -844,27 +1250,24 @@ el("sudsize").querySelectorAll("button").forEach(b=>{
     b.classList.add("on");S.sudSize=+b.dataset.n;persist();newSudoku();
   };
 });
-el("suddiff").querySelectorAll("button").forEach(b=>{
-  if(b.dataset.d===S.sudDiff){el("suddiff").querySelectorAll("button").forEach(x=>x.classList.remove("on"));b.classList.add("on");}
-  b.onclick=()=>{
-    el("suddiff").querySelectorAll("button").forEach(x=>x.classList.remove("on"));
-    b.classList.add("on");S.sudDiff=b.dataset.d;persist();newSudoku();
-  };
+el("langseg").querySelectorAll("button").forEach(b=>{
+  b.onclick=()=>{S.lang=b.dataset.l;persist();applyLang();};
 });
 el("b-hint").onclick=caseHint;
 el("b-check").onclick=caseCheck;
 el("b-accuse").onclick=accuse;
 el("b-skip").onclick=()=>{S.stats.streak=0;nextCase();};
+el("r-skip").onclick=()=>{S.stats.streak=0;nextRiddle();};
 el("s-new").onclick=newSudoku;
 el("s-check").onclick=sudCheck;
-el("s-sym").onclick=()=>{S.sudSym=!S.sudSym;el("s-sym").textContent="Symbols: "+(S.sudSym?"on":"off");persist();renderSudoku();};
-el("s-sym").textContent="Symbols: "+(S.sudSym?"on":"off");
+el("s-sym").onclick=()=>{S.sudSym=!S.sudSym;el("s-sym").textContent=t("sym")+(S.sudSym?t("on"):t("off"));persist();renderSudoku();};
 
 /* ---------- timer ---------- */
 setInterval(()=>{
   if(document.hidden)return;
   S.stats.totalSec++;
   if(activeView==="v-case"&&CS&&!CS.solved){CS.elapsed++;el("casetimer").textContent=fmt(CS.elapsed);}
+  if(activeView==="v-riddle"&&RS&&!RS.solved){RS.elapsed++;el("riddletimer").textContent=fmt(RS.elapsed);}
   if(activeView==="v-sud"&&S.sud&&!S.sud.solved){S.sud.elapsed++;el("sudtimer").textContent=fmt(S.sud.elapsed);}
   if(S.stats.totalSec%10===0)persist();
 },1000);
@@ -873,8 +1276,9 @@ document.addEventListener("visibilitychange",()=>{if(document.hidden)persist();}
 
 /* ---------- boot ---------- */
 loadCase();
+loadRiddle();
 if(S.sud&&S.sud.vals)renderSudoku();else newSudoku();
-renderDesk();
+applyLang();
 })();
 </script>
 <script>

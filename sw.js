@@ -1,4 +1,4 @@
-const C = "murdokus-v1";
+const C = "murdokus-v2";
 const ASSETS = ["./", "./index.html", "./manifest.webmanifest", "./apple-touch-icon.png"];
 self.addEventListener("install", e => {
   e.waitUntil(caches.open(C).then(c => c.addAll(ASSETS)).then(() => self.skipWaiting()));
